@@ -51,6 +51,14 @@ module Geocoder
         coordinates[1]
       end
 
+      def access_latitude
+        nil
+      end
+
+      def access_longitude
+        nil
+      end
+
       def state
         fail
       end
