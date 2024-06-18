@@ -19,7 +19,7 @@ module Geocoder::Result
     end
 
     def access_coordinates
-      fail unless d = @data["access"]
+      fail unless d = @data["access"]&.first
       [d["lat"].to_f, d["lng"].to_f]
     end
 
