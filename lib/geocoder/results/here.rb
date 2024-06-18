@@ -19,16 +19,17 @@ module Geocoder::Result
     end
 
     def access_coordinates
-      fail unless d = @data["access"]&.first
+      return unless d = @data["access"]&.first
+
       [d["lat"].to_f, d["lng"].to_f]
     end
 
     def access_latitude
-      access_coordinates[0]
+      access_coordinates&.first
     end
 
     def access_longitude
-      access_coordinates[1]
+      access_coordinates&.last
     end
 
     def route
@@ -38,10 +39,10 @@ module Geocoder::Result
     def street_address
       address_data["street"]
     end
-    
+
     def street_number
       address_data["houseNumber"]
-    end  
+    end
 
     def state
       address_data["state"]
