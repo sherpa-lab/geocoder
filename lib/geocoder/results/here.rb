@@ -23,6 +23,14 @@ module Geocoder::Result
       [d["lat"].to_f, d["lng"].to_f]
     end
 
+    def access_latitude
+      access_coordinates[0]
+    end
+
+    def access_longitude
+      access_coordinates[1]
+    end
+
     def route
       address_data["street"]
     end
