@@ -4,7 +4,7 @@ module Geocoder::Result
   class Google < Base
 
     def coordinates
-      ['lat', 'lng'].map{ |i| geometry['location'][i] }
+      ['lat', 'lng'].map { |i| geometry['location'][i] }
     end
 
     def address(format = :full)
@@ -18,9 +18,12 @@ module Geocoder::Result
     end
 
     def city
-      fields = [:locality, :sublocality,
-        :administrative_area_level_3,
-        :administrative_area_level_2]
+      fields = if country_code == 'NZ'
+                 [:sublocality, :locality, :administrative_area_level_3, :administrative_area_level_2]
+               else
+                 [:locality, :sublocality, :administrative_area_level_3, :administrative_area_level_2]
+               end
+
       fields.each do |f|
         if entity = address_components_of_type(f).first
           return entity['long_name']
@@ -110,7 +113,7 @@ module Geocoder::Result
     #   :postal_code
     #
     def address_components_of_type(type)
-      address_components.select{ |c| c['types'].include?(type.to_s) }
+      address_components.select { |c| c['types'].include?(type.to_s) }
     end
 
     def geometry
