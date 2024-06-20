@@ -86,6 +86,12 @@ module Geocoder::Result
       [south, west, north, east]
     end
 
+    def quality_score
+      return unless d = @data["scoring"]
+
+      d["queryScore"]
+    end
+
     private # ----------------------------------------------------------------
 
     def address_data
