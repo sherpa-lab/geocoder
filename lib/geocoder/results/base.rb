@@ -82,6 +82,10 @@ module Geocoder
       def country_code
         fail
       end
+
+      def quality_score
+        nil
+      end
     end
   end
 end
